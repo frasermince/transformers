@@ -847,6 +847,7 @@ class CLIPVisionTransformer(nn.Module):
             raise ValueError("You have to specify pixel_values")
 
         hidden_states = self.embeddings(pixel_values)
+        import pdb; pdb.set_trace()
         hidden_states = self.pre_layrnorm(hidden_states)
 
         encoder_outputs = self.encoder(

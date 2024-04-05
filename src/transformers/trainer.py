@@ -605,10 +605,13 @@ class Trainer:
 
         if (args.fp16 or args.bf16) and not (self.is_deepspeed_enabled or is_sagemaker_mp_enabled()):
             # deepspeed and SageMaker Model Parallel manage their own half precision
+            import pdb; pdb.set_trace()
             if args.half_precision_backend == "cpu_amp":
+                import pdb; pdb.set_trace()
                 self.use_cpu_amp = True
                 self.amp_dtype = torch.bfloat16
             elif args.half_precision_backend == "apex":
+                import pdb; pdb.set_trace()
                 if not is_apex_available():
                     raise ImportError(
                         "Using FP16 with APEX but APEX is not installed, please refer to"
@@ -2855,6 +2858,7 @@ class Trainer:
         arguments, depending on the situation.
         """
         if self.use_cpu_amp:
+            import pdb; pdb.set_trace()
             ctx_manager = torch.cpu.amp.autocast(cache_enabled=cache_enabled, dtype=self.amp_dtype)
         else:
             ctx_manager = contextlib.nullcontext()
@@ -2879,6 +2883,7 @@ class Trainer:
         Return:
             `torch.Tensor`: The tensor with training loss on this batch.
         """
+        import pdb; pdb.set_trace()
         model.train()
         inputs = self._prepare_inputs(inputs)
 
@@ -4108,6 +4113,7 @@ class Trainer:
             gradient_accumulation_plugin=gradient_accumulation_plugin,
             **self.args.accelerator_config.to_dict(),
         )
+        import pdb; pdb.set_trace()
         # some Trainer classes need to use `gather` instead of `gather_for_metrics`, thus we store a flag
         self.gather_function = self.accelerator.gather_for_metrics
 

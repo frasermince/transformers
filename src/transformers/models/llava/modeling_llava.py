@@ -418,7 +418,8 @@ class LlavaForConditionalGeneration(LlavaPreTrainedModel):
                 # this is not memory efficient at all (output_hidden_states=True) will save all the hidden stated.
                 selected_image_feature = image_outputs.hidden_states[
                     vision_feature_layer
-                ].to(pixel_values.dtype)
+                ]#.to(pixel_values.dtype)
+                import pdb; pdb.set_trace()
 
 
 
@@ -480,6 +481,7 @@ class LlavaForConditionalGeneration(LlavaPreTrainedModel):
             output_hidden_states=output_hidden_states,
             return_dict=return_dict,
         )
+        # import pdb; pdb.set_trace()
 
         logits = outputs[0]
 
